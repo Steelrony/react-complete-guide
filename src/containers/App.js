@@ -5,15 +5,37 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: 'ksalk', name: 'Max', age: 28},
-      { id: 'lksdk', name: 'Manu', age: 29},
-      { id: 'aksdj', name: 'Stephanie', age: 26}
-    ],
-    otherState: 'some other value', 
-    showPersons: false
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside Constructor', props)
+    this.state = {
+      persons: [
+        { id: 'ksalk', name: 'Max', age: 28},
+        { id: 'lksdk', name: 'Manu', age: 29},
+        { id: 'aksdj', name: 'Stephanie', age: 26}
+      ],
+      otherState: 'some other value', 
+      showPersons: false
+    }
   }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()')
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentWDidMount()')
+  }
+
+  // state = {
+  //   persons: [
+  //     { id: 'ksalk', name: 'Max', age: 28},
+  //     { id: 'lksdk', name: 'Manu', age: 29},
+  //     { id: 'aksdj', name: 'Stephanie', age: 26}
+  //   ],
+  //   otherState: 'some other value', 
+  //   showPersons: false
+  // }
 
   nameChangedHandler = ( event, id ) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -23,8 +45,6 @@ class App extends Component {
     const person = {
       ...this.state.persons[personIndex] //making copy of the object in the array
     };
-
-    //const person = Object.assign({}, this.state.persons[personIndex])
 
     person.name = event.target.value; 
 
@@ -47,6 +67,8 @@ class App extends Component {
   }
 
   render () {
+
+    console.log('[App.js] Inside render()')
     let persons = null;
 
     if (this.state.showPersons) {
@@ -60,6 +82,7 @@ class App extends Component {
         <div className={classes.App}>
           <Cockpit 
             showPersons={this.state.showPersons}
+            appTitle={this.props.title}
             persons={this.state.persons}
             clicked={this.togglePersonsHandler}/>
           {persons}   
