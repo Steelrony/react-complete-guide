@@ -1,8 +1,42 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import classes from './Person.css'
 
-class Person extends Component {
+class Person extends PureComponent {
+    constructor(props) {
+        super(props);
+        console.log('[Person.js] Inside Constructor', props);            
+    }
+    
+    componentWillMount() {
+        console.log('[Person.js] Inside componentWillMount()');
+    }
+    
+    componentDidMount() {
+        console.log('[Person.js] Inside componentDidMount()');
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(' [UPDATE Persons.js] Inside componentWillReceiveProps', nextProps);
+    }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('[UPDATE Persons.js] Inside shouldComponentUpdate', nextProps, nextState);
+    //     return nextProps.persons !== this.props.persons ||
+    //         nextProps.changed !== this.props.changed ||
+    //         nextProps.clicked !== this.props.clicked;
+    //     // return false;
+    // }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log('[UPDATE Person.js] Inside componentWillUpdate', nextProps, nextState);
+    }
+
+    componentDidUpdate() {
+        console.log('[UPDATE Person.js] Inside componentDidUpdate');
+    }
+
     render() {
+        console.log('[Person.js] Inside render()');
         return (
             <div className={classes.Person} >
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
