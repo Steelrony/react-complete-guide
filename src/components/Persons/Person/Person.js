@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react';
-import classes from './Person.css'
+import classes from './Person.css';
+import withClass from '../../../hoc/withClass';
+import Auxi from '../../../hoc/Auxi';
 
 class Person extends PureComponent {
     constructor(props) {
@@ -38,14 +40,19 @@ class Person extends PureComponent {
     render() {
         console.log('[Person.js] Inside render()');
         return (
-            <div className={classes.Person} >
+            <Auxi>
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
                 <input type="text" onChange={this.props.changed} value={this.props.name}/>
-            </div>
+            </Auxi>
         )    
+        // return [
+        //     <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>,
+        //     <p>{this.props.children}</p>,
+        //     <input type="text" onChange={this.props.changed} value={this.props.name}/>
+        // ]           
     }
 }
 
 
-export default Person;
+export default withClass(Person, classes.Person);
