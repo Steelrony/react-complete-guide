@@ -12,12 +12,13 @@ class App extends PureComponent {
     console.log('[App.js] Inside Constructor', props)
     this.state = {
       persons: [
-        { id: 'ksalk', name: 'Max', age: 28},
+        { id: 'ksalk', name: 'Max', age:  28},
         { id: 'lksdk', name: 'Manu', age: 29},
         { id: 'aksdj', name: 'Stephanie', age: 26}
       ],
       otherState: 'some other value', 
-      showPersons: false
+      showPersons: false,
+      toggleClicked: 0
     }
   }
 
@@ -79,7 +80,12 @@ class App extends PureComponent {
 
   togglePersonsHandler = () => {  
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState( (prevState, props) => {
+      return {
+        showPersons: !doesShow, 
+        toggleClicked: this.state.toggleClicked + 1
+      }
+    });
   }
 
   render () {
@@ -102,8 +108,7 @@ class App extends PureComponent {
             appTitle={this.props.title}
             persons={this.state.persons}
             clicked={this.togglePersonsHandler}/>
-          {persons}   
-        </Auxi>
+          {persons}              </Auxi>
       
     );
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
